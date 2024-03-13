@@ -17,7 +17,10 @@ public class ContaController {
     Logger logger = LoggerFactory.getLogger(ContaController.class);
 
     @Autowired
-    public ContaRepository contaRepository;
+    private ContaRepository contaRepository;
+
+    @Autowired
+    private ContaNovaProducer contaNovaProducer;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> inserir(@Valid @RequestBody ContaRequest request){
@@ -32,6 +35,10 @@ public class ContaController {
             conta = contaRepository.save(conta);
 
             logger.info("Conta cadastrada com numero: {} e agência: {} ", conta.getNumero(), conta.getAgencia());
+
+            contaNovaProducer.criar(conta);
+
+            logger.info("Evento de conta cadastrada publicado com numero: {} e agência: {} ", conta.getNumero(), conta.getAgencia());
 
             return ResponseEntity
                     .status(HttpStatus.CREATED)
