@@ -29,7 +29,7 @@ public class Conta {
     }
 
     public Conta(String documentoTitular, String nomeTitular,
-                 int agencia,long numero, BigDecimal saldo) {
+                 int agencia, long numero, BigDecimal saldo) {
         this.documentoTitular = documentoTitular;
         this.nomeTitular = nomeTitular;
         this.agencia = agencia;
@@ -64,5 +64,18 @@ public class Conta {
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Conta{" + "id=" + id +
+                ", documentoTitular='" + documentoTitular + '\'' +
+                ", nomeTitular='" + nomeTitular + '\'' +
+                ", agencia=" + agencia +
+                ", numero=" + numero +
+                ", saldo=" + saldo +
+                ", dataCriacao=" + dataCriacao +
+                '}';
     }
 }
